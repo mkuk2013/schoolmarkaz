@@ -13,18 +13,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = trim($_POST['name'] ?? '');
         $section = trim($_POST['section'] ?? 'A') ?: 'A';
         $ctid = (int)($_POST['class_teacher_id'] ?? 0) ?: null;
+        $campus_id = (int)($_POST['campus_id'] ?? 0) ?: null;
         if ($name === '') $errors[] = 'Class name is required.';
         $st = $pdo->prepare('SELECT id FROM classes WHERE name=? AND section=? AND id<>? LIMIT 1');
         $st->execute([$name, $section, $id]);
         if ($st->fetch()) $errors[] = 'A class with this name + section already exists.';
         if (!$errors) {
             if ($id > 0) {
-                $pdo->prepare('UPDATE classes SET name=?, section=?, class_teacher_id=? WHERE id=?')
-                    ->execute([$name, $section, $ctid, $id]);
+                $pdo->prepare('UPDATE classes SET name=?, section=?, class_teacher_id=?, campus_id=? WHERE id=?')
+                    ->execute([$name, $section, $ctid, $campus_id, $id]);
                 flash('success', 'Class updated.');
             } else {
-                $pdo->prepare('INSERT INTO classes (name, section, class_teacher_id) VALUES (?,?,?)')
-                    ->execute([$name, $section, $ctid]);
+                $pdo->prepare('INSERT INTO classes (name, section, class_teacher_id, campus_id) VALUES (?,?,?,?)')
+                    ->execute([$name, $section, $ctid, $campus_id]);
                 flash('success', 'Class added.');
             }
             redirect('admin/classes.php');
@@ -102,13 +103,22 @@ layout_top('Classes & Subjects', 'classes');
         <div class="field"><label>Section</label>
           <input type="text" name="section" value="<?= e($editClass['section'] ?? 'A') ?>" maxlength="10"></div>
       </div>
-      <div class="field"><label>Class Teacher</label>
-        <select name="class_teacher_id">
-          <option value="">— None —</option>
-          <?php foreach ($teachers as $t): ?>
-          <option value="<?= (int)$t['id'] ?>" <?= (int)($editClass['class_teacher_id'] ?? 0)===(int)$t['id']?'selected':'' ?>><?= e($t['name']) ?></option>
-          <?php endforeach; ?>
-        </select></div>
+      <div class="form-row">
+        <div class="field"><label>Class Teacher</label>
+          <select name="class_teacher_id">
+            <option value="">— None —</option>
+            <?php foreach ($teachers as $t): ?>
+            <option value="<?= (int)$t['id'] ?>" <?= (int)($editClass['class_teacher_id'] ?? 0)===(int)$t['id']?'selected':'' ?>><?= e($t['name']) ?></option>
+            <?php endforeach; ?>
+          </select></div>
+        <div class="field"><label>Campus</label>
+          <select name="campus_id">
+            <option value="">— Main / None —</option>
+            <?php foreach (campuses() as $cp): ?>
+            <option value="<?= (int)$cp['id'] ?>" <?= (int)($editClass['campus_id'] ?? 0)===(int)$cp['id']?'selected':'' ?>><?= e($cp['name']) ?></option>
+            <?php endforeach; ?>
+          </select></div>
+      </div>
       <button class="btn" type="submit"><?= $editClass ? 'Update' : 'Add' ?> Class</button>
       <?php if ($editClass): ?><a class="btn secondary" href="<?= e(app_url('admin/classes.php')) ?>">Cancel</a><?php endif; ?>
     </form>

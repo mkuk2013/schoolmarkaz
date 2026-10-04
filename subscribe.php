@@ -42,14 +42,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$errors && $sel_pkg) {
-        $price = package_price((float)$sel_pkg['price_monthly'], $old['cycle']);
+        $monthly = (float)$sel_pkg['price_monthly'];
+        $note = null;
+        if (!empty($sel_pkg['per_student'])) {
+            $count = max(1, min(100000, (int)($_POST['student_count'] ?? 100)));
+            $monthly = $monthly * $count;
+            $note = $sel_pkg['name'] . ' plan: ' . $count . ' students x ' . fmt_money((float)$sel_pkg['price_monthly']) . ' per student';
+        }
+        $price = package_price($monthly, $old['cycle']);
         $order_no = next_order_no();
         db()->prepare("INSERT INTO package_orders
-            (order_no, package_id, billing_cycle, amount, school_name, contact_name, phone, email, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')")
+            (order_no, package_id, billing_cycle, amount, school_name, contact_name, phone, email, status, note)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?)")
             ->execute([
                 $order_no, (int)$sel_pkg['id'], $old['cycle'], $price['amount'],
-                $old['school_name'], $old['contact_name'], $old['phone'], $old['email'],
+                $old['school_name'], $old['contact_name'], $old['phone'], $old['email'], $note,
             ]);
         redirect('pay.php?o=' . urlencode($order_no));
     }
@@ -98,12 +105,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php foreach ($packages as $p): ?>
         <div class="pkg<?= $sel_pkg && (int)$sel_pkg['id'] === (int)$p['id'] ? ' sel' : '' ?>" data-id="<?= (int)$p['id'] ?>">
           <div class="pname"><?= e($p['name']) ?></div>
-          <div class="pamount"><?= e(fmt_money($p['price_monthly'])) ?><small style="font-size:12px;font-weight:400">/mo</small></div>
-          <div style="font-size:12px;color:var(--muted)">Up to <?= e(number_format((int)$p['max_students'])) ?> students</div>
+          <?php if (!empty($p['per_student'])): ?>
+            <div class="pamount"><?= e(fmt_money($p['price_monthly'])) ?><small style="font-size:12px;font-weight:400">/student/mo</small></div>
+            <div style="font-size:12px;color:var(--muted)">Pay only for your students</div>
+          <?php elseif ((float)$p['price_monthly'] <= 0): ?>
+            <div class="pamount">Free</div>
+            <div style="font-size:12px;color:var(--muted)">Up to <?= e(number_format((int)$p['max_students'])) ?> students</div>
+          <?php else: ?>
+            <div class="pamount"><?= e(fmt_money($p['price_monthly'])) ?><small style="font-size:12px;font-weight:400">/mo</small></div>
+            <div style="font-size:12px;color:var(--muted)">Up to <?= e(number_format((int)$p['max_students'])) ?> students</div>
+          <?php endif; ?>
         </div>
         <?php endforeach; ?>
       </div>
       <input type="hidden" name="package_id" id="package_id" value="<?= e($old['package_id']) ?>">
+
+      <div id="countRow" style="display:none;margin:14px 0 4px">
+        <div class="field"><label>Number of students</label>
+          <input type="number" name="student_count" id="student_count" value="100" min="1" max="100000" style="max-width:220px">
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Pro plan: per-student rate × your students = monthly price.</div></div>
+      </div>
 
       <h3 style="margin:14px 0 10px">2. Billing cycle</h3>
       <div class="cycles">
@@ -137,20 +158,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <script>
 const prices = <?= json_encode(array_column($packages, 'price_monthly', 'id')) ?>;
+<?php $perMap = []; foreach ($packages as $p) { $perMap[(int)$p['id']] = !empty($p['per_student']) ? 1 : 0; } ?>
+const pers = <?= json_encode($perMap) ?>;
 const pkgInput = document.getElementById('package_id');
 const cycInput = document.getElementById('cycle');
+const countInput = document.getElementById('student_count');
 function fmt(n){ return 'PKR ' + Number(n).toLocaleString('en-PK'); }
 function refresh(){
   document.querySelectorAll('.pkg').forEach(el=>el.classList.toggle('sel', el.dataset.id === pkgInput.value));
   document.querySelectorAll('.cycle').forEach(el=>el.classList.toggle('sel', el.dataset.cycle === cycInput.value));
-  const m = parseFloat(prices[pkgInput.value] || 0);
-  document.getElementById('mprice').textContent = m ? fmt(m) + '/month' : '';
+  const base = parseFloat(prices[pkgInput.value] || 0);
+  const isPer = (pers[pkgInput.value] || 0) === 1;
+  document.getElementById('countRow').style.display = isPer ? '' : 'none';
+  const cnt = isPer ? Math.max(1, parseInt(countInput.value || '0', 10) || 0) : 1;
+  const m = base * cnt;
+  document.getElementById('mprice').textContent = m ? fmt(m) + '/month' : (pkgInput.value ? 'Free' : '');
   document.getElementById('yprice').textContent = m ? fmt(m*10) + '/year' : '';
   const total = cycInput.value === 'yearly' ? m*10 : m;
-  document.getElementById('total').textContent = m ? fmt(total) : '—';
+  document.getElementById('total').textContent = m ? fmt(total) : (pkgInput.value ? 'Free' : '—');
 }
 document.querySelectorAll('.pkg').forEach(el=>el.addEventListener('click',()=>{pkgInput.value=el.dataset.id;refresh();}));
 document.querySelectorAll('.cycle').forEach(el=>el.addEventListener('click',()=>{cycInput.value=el.dataset.cycle;refresh();}));
+countInput.addEventListener('input', refresh);
 refresh();
 </script>
 </body>

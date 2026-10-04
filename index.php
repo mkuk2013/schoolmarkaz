@@ -20,6 +20,10 @@ $features = [
     ['icon' => '👪', 'title' => 'Parent Portal',  'desc' => 'Parents check attendance, results, fees and school notices from their own login.'],
     ['icon' => '📊', 'title' => 'Finance & Payroll', 'desc' => 'Income/expense ledger, salary payments with slips, and month-wise reports.'],
     ['icon' => '🗓', 'title' => 'Timetable',     'desc' => 'Class-wise weekly timetables for teachers and students, printable anytime.'],
+    ['icon' => '🚪', 'title' => 'Gate Attendance', 'desc' => 'Barcode ID-card scanning at the gate — entry/exit logged, attendance marked and parents alerted instantly.'],
+    ['icon' => '🧾', 'title' => 'Bank Challans & ID Cards', 'desc' => '3-copy PDF bank challans, student ID cards with barcodes, and certificates in one click.'],
+    ['icon' => '❓', 'title' => 'Online Quizzes', 'desc' => 'Teachers create MCQ quizzes (AI can draft them), students attempt online and get instant auto-marked results.'],
+    ['icon' => '🏢', 'title' => 'Multi-Campus', 'desc' => 'Run all your branches from one system — students, teachers and classes per campus, with easy transfers.'],
 ];
 ?>
 <!DOCTYPE html>
@@ -29,6 +33,8 @@ $features = [
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e($schoolName) ?> — <?= e(APP_TAGLINE) ?></title>
 <link rel="icon" type="image/png" href="<?= e(app_url('assets/icons/logo.png')) ?>">
+<link rel="manifest" href="<?= e(app_url('manifest.webmanifest')) ?>">
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('<?= e(app_url('sw.js')) ?>').catch(function(){});}</script>
 <link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>">
 <script>try{if(localStorage.getItem('sm-theme')==='dark'){document.documentElement.dataset.theme='dark';}}catch(e){}</script>
 <style>
@@ -116,8 +122,16 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
       <div class="card-body">
         <p class="pname"><?= e($p['name']) ?></p>
         <?php if ($i === 2): ?><span class="badge blue">Most Popular</span><?php endif; ?>
+        <?php if (!empty($p['per_student'])): ?>
+        <p class="pamount"><?= e(fmt_money($p['price_monthly'])) ?><small>/student/month</small></p>
+        <p style="color:var(--muted);font-size:13px;margin:0 0 6px">Pay only for your students</p>
+        <?php elseif ((float) $p['price_monthly'] <= 0): ?>
+        <p class="pamount">Free</p>
+        <p style="color:var(--muted);font-size:13px;margin:0 0 6px">Up to <?= e(number_format((int) $p['max_students'])) ?> students</p>
+        <?php else: ?>
         <p class="pamount"><?= e(fmt_money($p['price_monthly'])) ?><small>/month</small></p>
         <p style="color:var(--muted);font-size:13px;margin:0 0 6px">Up to <?= e(number_format((int) $p['max_students'])) ?> students</p>
+        <?php endif; ?>
         <ul>
           <?php foreach ($featLines as $line): ?>
           <li><?= e($line) ?></li>

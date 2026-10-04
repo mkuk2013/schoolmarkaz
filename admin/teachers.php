@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $subject    = trim($_POST['subject'] ?? '');
         $salary     = (float)($_POST['salary'] ?? 0);
         $joining    = $_POST['joining_date'] ?: null;
+        $campus_id  = (int)($_POST['campus_id'] ?? 0) ?: null;
         $status     = $_POST['status'] ?? 'Active';
 
         if ($staff_no === '') $errors[] = 'Staff number is required.';
@@ -53,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$errors) {
             if ($id > 0) {
-                $pdo->prepare('UPDATE teachers SET staff_no=?, name=?, phone=?, cnic=?, subject=?, salary=?, joining_date=?, status=? WHERE id=?')
-                    ->execute([$staff_no, $name, $phone, $cnic, $subject, $salary, $joining, $status, $id]);
+                $pdo->prepare('UPDATE teachers SET staff_no=?, name=?, phone=?, cnic=?, subject=?, salary=?, joining_date=?, campus_id=?, status=? WHERE id=?')
+                    ->execute([$staff_no, $name, $phone, $cnic, $subject, $salary, $joining, $campus_id, $status, $id]);
                 $st = $pdo->prepare('SELECT user_id FROM teachers WHERE id=?');
                 $st->execute([$id]);
                 $uid = $st->fetchColumn();
@@ -69,9 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 flash('success', 'Teacher updated.');
             } else {
                 $uid = create_user_account(strtolower($staff_no), 'teacher', $staff_no);
-                $pdo->prepare('INSERT INTO teachers (staff_no, name, phone, cnic, subject, salary, joining_date, status, user_id)
-                               VALUES (?,?,?,?,?,?,?,?,?)')
-                    ->execute([$staff_no, $name, $phone, $cnic, $subject, $salary, $joining, $status, $uid]);
+                $pdo->prepare('INSERT INTO teachers (staff_no, name, phone, cnic, subject, salary, joining_date, campus_id, status, user_id)
+                               VALUES (?,?,?,?,?,?,?,?,?,?)')
+                    ->execute([$staff_no, $name, $phone, $cnic, $subject, $salary, $joining, $campus_id, $status, $uid]);
                 flash('success', "Teacher added. Login: " . strtolower($staff_no) . " / password: staff number.");
             }
             redirect('admin/teachers.php');
@@ -90,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $action = $_GET['action'] ?? 'list';
 if ($action === 'add' || $action === 'edit') {
-    $row = ['id'=>0,'staff_no'=>next_staff_no(),'name'=>'','phone'=>'','cnic'=>'','subject'=>'','salary'=>'','joining_date'=>today(),'status'=>'Active'];
+    $row = ['id'=>0,'staff_no'=>next_staff_no(),'name'=>'','phone'=>'','cnic'=>'','subject'=>'','salary'=>'','joining_date'=>today(),'campus_id'=>'','status'=>'Active'];
     if ($action === 'edit') {
         $st = $pdo->prepare('SELECT * FROM teachers WHERE id=?');
         $st->execute([(int)($_GET['id'] ?? 0)]);
@@ -127,6 +128,16 @@ if ($action === 'add' || $action === 'edit') {
               <option <?= $row['status']==='Active'?'selected':'' ?>>Active</option>
               <option <?= $row['status']==='Inactive'?'selected':'' ?>>Inactive</option>
             </select></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Campus</label>
+            <select name="campus_id">
+              <option value="">— Main / None —</option>
+              <?php foreach (campuses() as $cp): ?>
+              <option value="<?= (int)$cp['id'] ?>" <?= (int)($row['campus_id'] ?? 0)===(int)$cp['id']?'selected':'' ?>><?= e($cp['name']) ?></option>
+              <?php endforeach; ?>
+            </select></div>
+          <div class="field"></div>
         </div>
         <button class="btn" type="submit">Save Teacher</button>
         <a class="btn secondary" href="<?= e(app_url('admin/teachers.php')) ?>">Cancel</a>
