@@ -35,6 +35,8 @@ const REQUIRED_TABLES = [
     'fee_heads', 'fee_invoices', 'fee_invoice_items', 'fee_payments',
     'exams', 'marks', 'timetable', 'finance_transactions',
     'salary_payments', 'announcements', 'packages', 'package_orders', 'admissions_inquiries',
+    'campuses', 'student_documents', 'gate_logs', 'notification_log',
+    'quizzes', 'quiz_questions', 'quiz_attempts',
 ];
 
 /**

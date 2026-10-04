@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS classes (
     name VARCHAR(60) NOT NULL,
     section VARCHAR(10) NOT NULL DEFAULT 'A',
     class_teacher_id INT UNSIGNED NULL,
+    campus_id INT UNSIGNED NULL,
     UNIQUE KEY uq_class_section (name, section)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -61,9 +62,11 @@ CREATE TABLE IF NOT EXISTS students (
     name VARCHAR(120) NOT NULL,
     gender ENUM('Male','Female','Other') NOT NULL DEFAULT 'Male',
     dob DATE NULL,
+    photo VARCHAR(255) DEFAULT '',
     class_id INT UNSIGNED NOT NULL,
     section VARCHAR(10) NOT NULL DEFAULT 'A',
     parent_id INT UNSIGNED NULL,
+    campus_id INT UNSIGNED NULL,
     admission_date DATE NULL,
     status ENUM('Active','Inactive') NOT NULL DEFAULT 'Active',
     user_id INT UNSIGNED NULL UNIQUE,
@@ -82,6 +85,7 @@ CREATE TABLE IF NOT EXISTS teachers (
     salary DECIMAL(12,2) NOT NULL DEFAULT 0,
     joining_date DATE NULL,
     status ENUM('Active','Inactive') NOT NULL DEFAULT 'Active',
+    campus_id INT UNSIGNED NULL,
     user_id INT UNSIGNED NULL UNIQUE,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -224,6 +228,7 @@ CREATE TABLE IF NOT EXISTS packages (
     name VARCHAR(60) NOT NULL,
     max_students INT UNSIGNED NOT NULL,
     price_monthly DECIMAL(12,2) NOT NULL,
+    per_student TINYINT(1) NOT NULL DEFAULT 0,
     features TEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -264,12 +269,116 @@ CREATE TABLE IF NOT EXISTS admissions_inquiries (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Default packages (safe to re-run: only inserted when table is empty — see seed).
-INSERT INTO packages (name, max_students, price_monthly, features) VALUES
-('Micro', 75, 1500, 'Up to 75 students\nAttendance & fees\n1 admin login'),
-('Starter', 150, 3000, 'Up to 150 students\nAttendance, fees & results\nParent portal\n5 staff logins'),
-('Growth', 300, 6000, 'Up to 300 students\nEverything in Starter\nFinance & payroll\nUnlimited staff logins\nPriority support');
+-- Default packages (guarded by name so schema re-runs never duplicate them).
+INSERT INTO packages (name, max_students, price_monthly, features)
+SELECT 'Micro', 75, 1500, 'Up to 75 students\nAttendance & fees\n1 admin login' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM packages WHERE name = 'Micro');
+INSERT INTO packages (name, max_students, price_monthly, features)
+SELECT 'Starter', 150, 3000, 'Up to 150 students\nAttendance, fees & results\nParent portal\n5 staff logins' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM packages WHERE name = 'Starter');
+INSERT INTO packages (name, max_students, price_monthly, features)
+SELECT 'Growth', 300, 6000, 'Up to 300 students\nEverything in Starter\nFinance & payroll\nUnlimited staff logins\nPriority support' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM packages WHERE name = 'Growth');
 
-INSERT INTO settings (`key`, `value`) VALUES
+INSERT IGNORE INTO settings (`key`, `value`) VALUES
 ('fine_per_day', '50'),
 ('due_day', '10'),
 ('session_year', '2026-27');
+
+-- ============================================================================
+-- v2 additions — School Nizam parity: campuses, documents, gate attendance,
+-- parent notifications, quizzes. Safe on fresh AND existing installs: the
+-- ALTERs below add the new columns to older databases (duplicate-column
+-- errors are ignored by the self-healing installer).
+-- ============================================================================
+
+CREATE TABLE IF NOT EXISTS campuses (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    address VARCHAR(255) DEFAULT '',
+    phone VARCHAR(40) DEFAULT '',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS student_documents (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    student_id INT UNSIGNED NOT NULL,
+    doc_type VARCHAR(60) NOT NULL DEFAULT 'Other',
+    file_path VARCHAR(255) NOT NULL,
+    original_name VARCHAR(255) DEFAULT '',
+    uploaded_by INT UNSIGNED NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    KEY idx_doc_student (student_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS gate_logs (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    person_type ENUM('student','teacher') NOT NULL DEFAULT 'student',
+    person_id INT UNSIGNED NOT NULL,
+    direction ENUM('in','out') NOT NULL DEFAULT 'in',
+    source ENUM('scan','manual','import') NOT NULL DEFAULT 'scan',
+    gate VARCHAR(60) NOT NULL DEFAULT 'Main Gate',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    KEY idx_gate_person (person_type, person_id, created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS notification_log (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    student_id INT UNSIGNED NULL,
+    phone VARCHAR(40) DEFAULT '',
+    channel ENUM('sms','app') NOT NULL DEFAULT 'sms',
+    message TEXT NOT NULL,
+    status ENUM('queued','sent','failed') NOT NULL DEFAULT 'queued',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    KEY idx_notif_student (student_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS quizzes (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(160) NOT NULL,
+    class_id INT UNSIGNED NULL,
+    subject_id INT UNSIGNED NULL,
+    created_by INT UNSIGNED NULL,
+    is_published TINYINT(1) NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    KEY idx_quiz_class (class_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS quiz_questions (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    quiz_id INT UNSIGNED NOT NULL,
+    question TEXT NOT NULL,
+    option_a VARCHAR(255) NOT NULL DEFAULT '',
+    option_b VARCHAR(255) NOT NULL DEFAULT '',
+    option_c VARCHAR(255) NOT NULL DEFAULT '',
+    option_d VARCHAR(255) NOT NULL DEFAULT '',
+    correct CHAR(1) NOT NULL DEFAULT 'A',
+    marks DECIMAL(6,2) NOT NULL DEFAULT 1,
+    KEY idx_qq_quiz (quiz_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS quiz_attempts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    quiz_id INT UNSIGNED NOT NULL,
+    student_id INT UNSIGNED NOT NULL,
+    score DECIMAL(8,2) NOT NULL DEFAULT 0,
+    total DECIMAL(8,2) NOT NULL DEFAULT 0,
+    answers TEXT,
+    submitted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_attempt (quiz_id, student_id),
+    KEY idx_attempt_student (student_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE students ADD COLUMN photo VARCHAR(255) DEFAULT '';
+ALTER TABLE students ADD COLUMN campus_id INT UNSIGNED NULL;
+ALTER TABLE teachers ADD COLUMN campus_id INT UNSIGNED NULL;
+ALTER TABLE classes ADD COLUMN campus_id INT UNSIGNED NULL;
+ALTER TABLE packages ADD COLUMN per_student TINYINT(1) NOT NULL DEFAULT 0;
+
+-- v2 packages (guarded by name, safe on re-runs): Free tier + per-student Pro.
+INSERT INTO packages (name, max_students, price_monthly, per_student, features)
+SELECT 'Free', 50, 0, 0, 'Up to 50 students\nAttendance & fees\nParent portal\nFree forever for small schools' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM packages WHERE name = 'Free');
+INSERT INTO packages (name, max_students, price_monthly, per_student, features)
+SELECT 'Pro', 5000, 50, 1, 'Rs 50 per student / month — pay only for your students\nEverything in Growth\nGate attendance + parent SMS alerts\nOnline quizzes + AI questions\nMulti-campus\nPriority support' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM packages WHERE name = 'Pro');

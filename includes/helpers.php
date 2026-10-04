@@ -170,3 +170,136 @@ function week_days(): array
 {
     return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 }
+
+/* =========================================================================
+ * v2 — School Nizam parity helpers: campuses, parent notifications, AI.
+ * ========================================================================= */
+
+/** @return array<int,array<string,mixed>> All campuses, name order. */
+function campuses(): array
+{
+    return db()->query('SELECT * FROM campuses ORDER BY name ASC')->fetchAll();
+}
+
+/** Ensure at least the Main Campus exists; returns its id. */
+function ensure_main_campus(): int
+{
+    $id = db()->query('SELECT id FROM campuses ORDER BY id ASC LIMIT 1')->fetchColumn();
+    if ($id) {
+        return (int) $id;
+    }
+    db()->exec("INSERT INTO campuses (name) VALUES ('Main Campus')");
+    return (int) db()->lastInsertId();
+}
+
+function campus_name(?int $id): string
+{
+    if (!$id) {
+        return '—';
+    }
+    static $map = null;
+    if ($map === null) {
+        $map = [];
+        foreach (campuses() as $c) {
+            $map[(int) $c['id']] = (string) $c['name'];
+        }
+    }
+    return $map[$id] ?? '—';
+}
+
+/**
+ * Record a parent notification in the outbox log. When SMS is enabled and a
+ * provider URL + key are configured in Settings, the message is also sent
+ * through the provider's simple HTTP API; otherwise it stays "queued" in
+ * the log (parents still see gate alerts inside the portal).
+ */
+function notify_parent(int $studentId, string $message): void
+{
+    try {
+        $st = db()->prepare(
+            'SELECT p.phone FROM students s
+             LEFT JOIN parents p ON p.id = s.parent_id WHERE s.id = ? LIMIT 1'
+        );
+        $st->execute([$studentId]);
+        $phone = (string) ($st->fetchColumn() ?: '');
+
+        $ins = db()->prepare(
+            'INSERT INTO notification_log (student_id, phone, channel, message, status)
+             VALUES (?, ?, \'sms\', ?, \'queued\')'
+        );
+        $ins->execute([$studentId, $phone, $message]);
+        $logId = (int) db()->lastInsertId();
+
+        if ($phone !== '' && setting('sms_enabled') === '1') {
+            $url = setting('sms_api_url');
+            $key = setting('sms_api_key');
+            $sender = setting('sms_sender', 'School');
+            if ($url !== '' && $key !== '') {
+                $payload = json_encode([
+                    'api_key' => $key, 'sender' => $sender,
+                    'phone' => $phone, 'message' => $message,
+                ]);
+                $ctx = stream_context_create(['http' => [
+                    'method' => 'POST',
+                    'header' => "Content-Type: application/json\r\n",
+                    'content' => $payload,
+                    'timeout' => 8,
+                    'ignore_errors' => true,
+                ]]);
+                $resp = @file_get_contents($url, false, $ctx);
+                $ok = $resp !== false;
+                db()->prepare('UPDATE notification_log SET status = ? WHERE id = ?')
+                    ->execute([$ok ? 'sent' : 'failed', $logId]);
+            }
+        }
+    } catch (Throwable $e) {
+        /* Notifications must never break the calling page. */
+    }
+}
+
+/**
+ * Call an OpenAI-compatible chat API and decode a JSON answer.
+ * Returns null when AI is not configured in Settings (ai_api_key empty)
+ * or on any error — callers must always offer a manual fallback.
+ */
+function ai_json(string $system, string $user): ?array
+{
+    $key = setting('ai_api_key');
+    if ($key === '') {
+        return null;
+    }
+    $url = setting('ai_api_url', 'https://api.openai.com/v1/chat/completions');
+    $model = setting('ai_model', 'gpt-4o-mini');
+    try {
+        $payload = json_encode([
+            'model' => $model,
+            'messages' => [
+                ['role' => 'system', 'content' => $system],
+                ['role' => 'user', 'content' => $user],
+            ],
+            'temperature' => 0.7,
+        ]);
+        $ctx = stream_context_create(['http' => [
+            'method' => 'POST',
+            'header' => "Content-Type: application/json\r\nAuthorization: Bearer {$key}\r\n",
+            'content' => $payload,
+            'timeout' => 30,
+            'ignore_errors' => true,
+        ]]);
+        $resp = @file_get_contents($url, false, $ctx);
+        if ($resp === false) {
+            return null;
+        }
+        $data = json_decode($resp, true);
+        $content = $data['choices'][0]['message']['content'] ?? null;
+        if (!is_string($content)) {
+            return null;
+        }
+        $content = trim($content);
+        $content = preg_replace('/^```(?:json)?|```$/m', '', $content) ?? $content;
+        $decoded = json_decode(trim($content), true);
+        return is_array($decoded) ? $decoded : null;
+    } catch (Throwable $e) {
+        return null;
+    }
+}
