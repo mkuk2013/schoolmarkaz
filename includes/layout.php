@@ -150,7 +150,7 @@ function layout_top(string $title, string $active = ''): void
 <link rel="manifest" href="<?= e($base) ?>/manifest.webmanifest">
 <link rel="apple-touch-icon" href="<?= e($base) ?>/assets/icons/icon-192.png">
 <link rel="stylesheet" href="<?= e($base) ?>/assets/css/style.css?v=4">
-<style>.nav-icon svg,.bottom-icon svg,.icon-btn svg,.hamburger svg{display:block}.nav-icon,.bottom-icon{display:inline-flex;align-items:center;justify-content:center}</style>
+<style>.nav-icon svg,.bottom-icon svg,.icon-btn svg,.hamburger svg{display:block}.nav-icon,.bottom-icon{display:inline-flex;align-items:center;justify-content:center}.brand-mark{background:transparent;padding:0}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">

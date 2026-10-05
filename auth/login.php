@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 .lg-shell { display: grid; grid-template-columns: 1.05fr .95fr; min-height: 100vh; }
 .lg-brand { position: relative; color: #fff; padding: 44px 48px; display: flex; flex-direction: column; background: linear-gradient(155deg, rgba(7,28,74,.90), rgba(4,58,48,.88)), url('<?= e(app_url('assets/img/classroom.jpg')) ?>') center/cover; }
 .lg-brand .lg-logo { display: flex; align-items: center; gap: 12px; font-family: "Plus Jakarta Sans", Inter, sans-serif; font-weight: 800; font-size: 22px; color: #fff; }
-.lg-brand .lg-logo img { width: 46px; height: 46px; background: #fff; border-radius: 12px; padding: 3px; }
+.lg-brand .lg-logo img { width: 46px; height: 46px; border-radius: 12px; }
 .lg-brand .lg-mid { margin: auto 0; max-width: 480px; }
 .lg-brand h1 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -1px; margin: 0 0 14px; }
 .lg-brand h1 .hl { background: linear-gradient(90deg, #7dd3fc, #6ee7b7); -webkit-background-clip: text; background-clip: text; color: transparent; }
