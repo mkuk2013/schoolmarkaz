@@ -112,7 +112,7 @@ function layout_top(string $title, string $active = ''): void
 <link rel="icon" href="<?= e($base) ?>/assets/icons/logo.png" type="image/png">
 <link rel="manifest" href="<?= e($base) ?>/manifest.webmanifest">
 <link rel="apple-touch-icon" href="<?= e($base) ?>/assets/icons/icon-192.png">
-<link rel="stylesheet" href="<?= e($base) ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= e($base) ?>/assets/css/style.css?v=3">
 <script>try{if(localStorage.getItem('sm-theme')==='dark'){document.documentElement.dataset.theme='dark';}}catch(e){}</script>
 </head>
 <body>

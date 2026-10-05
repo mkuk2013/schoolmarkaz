@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Subscribe — <?= e(APP_NAME) ?></title>
 <link rel="icon" type="image/png" href="<?= e(app_url('assets/icons/logo.png')) ?>">
-<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>">
+<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=3">
 <script>try{if(localStorage.getItem('sm-theme')==='dark'){document.documentElement.dataset.theme='dark';}}catch(e){}</script>
 <style>
 .wrap { max-width: 720px; margin: 0 auto; padding: 24px 18px 40px; }

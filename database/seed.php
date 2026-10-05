@@ -26,7 +26,7 @@ try {
 
     // --- School profile -------------------------------------------------------
     $pdo->exec("INSERT INTO schools (name, address, phone, email, session_year, package_id)
-        VALUES ('Markaz Public School', 'Main Road, Umerkot, Sindh', '0300-1234567',
+        VALUES ('School Markaz', 'Main Road, Umerkot, Sindh', '0300-1234567',
         'info@markazschool.edu.pk', '2026-27', 2)");
 
     // --- Users ----------------------------------------------------------------
