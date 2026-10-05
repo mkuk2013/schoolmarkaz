@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login — <?= e(APP_NAME) ?></title>
 <link rel="icon" type="image/png" href="<?= e(app_url('assets/icons/logo.png')) ?>">
-<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=4">
+<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <script>try{if(localStorage.getItem('sm-theme')==='dark'){document.documentElement.dataset.theme='dark';}}catch(e){}</script>
@@ -105,6 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 .g-a { background: linear-gradient(135deg, #2563eb, #1d4ed8); } .g-t { background: linear-gradient(135deg, #059669, #047857); }
 .g-s { background: linear-gradient(135deg, #d97706, #b45309); } .g-p { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
 .lg-back { text-align: center; font-size: 13.5px; margin: 22px 0 0; }
+@media (max-width: 480px) {
+  .lg-demos { grid-template-columns: 1fr; }
+  .lg-form h2 { font-size: 24px; }
+}
 @media (max-width: 900px) {
   .lg-shell { grid-template-columns: 1fr; }
   .lg-brand { display: none; }

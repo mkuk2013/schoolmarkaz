@@ -345,3 +345,19 @@ h1, h2, h3, .page-title, .brand-text strong, .stat .stat-num, .section-title, .p
 .welcome .btn.ghost:hover { background: rgba(255, 255, 255, .22); color: #fff; }
 .card { transition: box-shadow .2s ease, transform .2s ease; }
 .lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+/* ================= v5 mobile polish ================= */
+html, body { overflow-x: clip; }
+.page-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stat .stat-num { font-size: clamp(21px, 6.4vw, 31px); overflow-wrap: anywhere; }
+img, video, canvas { max-width: 100%; height: auto; }
+@media (max-width: 640px) {
+  .topbar { padding: 10px 12px; gap: 8px; }
+  .user-chip .badge { display: none; }
+  .welcome { padding: 18px 16px; }
+  .welcome-actions { width: 100%; }
+  .welcome-actions .btn { flex: 1 1 30%; justify-content: center; }
+  .card-head { padding: 13px 16px; }
+  .stat { padding: 14px; }
+  .grid-4 { gap: 10px; }
+}

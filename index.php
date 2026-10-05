@@ -63,7 +63,7 @@ $faqs = [
 <link rel="icon" type="image/png" href="<?= e(app_url('assets/icons/logo.png')) ?>">
 <link rel="manifest" href="<?= e(app_url('manifest.webmanifest')) ?>">
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('<?= e(app_url('sw.js')) ?>').catch(function(){});}</script>
-<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=4">
+<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -195,6 +195,7 @@ $faqs = [
 .foot-brand p { color: var(--muted); font-size: 13.5px; margin: 12px 0 0; max-width: 320px; }
 .foot-bottom { border-top: 1px solid var(--border); padding-top: 16px; }
 @media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .foot-grid { grid-template-columns: 1fr; } .hero { padding: 42px 20px 38px; margin-top: 14px; } .band-text { padding: 26px 22px; } .glass-chip { font-size: 12px; padding: 8px 10px; } }
 footer.site { text-align: center; color: var(--muted); font-size: 13px; padding: 28px 0 22px; }
 </style>
 </head>
