@@ -85,10 +85,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 .lg-field { margin-bottom: 16px; }
 .lg-field label { display: block; font-weight: 600; font-size: 13.5px; margin-bottom: 7px; }
 .lg-input { position: relative; }
-.lg-input svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.lg-input > svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
 .lg-input input { width: 100%; box-sizing: border-box; padding: 12px 44px 12px 42px; border: 1.5px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--text); font: inherit; font-size: 15px; transition: border-color .15s, box-shadow .15s; }
 .lg-input input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,.14); }
-.lg-eye { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); padding: 7px; border-radius: 8px; display: flex; }
+.lg-eye { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; background: none; border: none; cursor: pointer; color: var(--muted); padding: 0; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.lg-eye svg { flex: none; display: block; }
 .lg-eye:hover { color: var(--text); }
 .lg-submit { width: 100%; padding: 13px; font-size: 15.5px; border-radius: 12px; margin-top: 4px; }
 .lg-divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12.5px; font-weight: 600; letter-spacing: .4px; margin: 24px 0 14px; text-transform: uppercase; }
