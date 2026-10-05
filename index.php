@@ -26,6 +26,19 @@ $features = [
     ['icon' => '🏢', 'title' => 'Multi-Campus', 'desc' => 'Run all your branches from one system — students, teachers and classes per campus, with easy transfers.'],
 ];
 
+$svgs = [
+    '<circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.4 2.4 4.6-5"/>',
+    '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5h.01M17.5 14.5h.01"/>',
+    '<circle cx="12" cy="9" r="5.5"/><path d="M8.8 13.5 7 21l5-2.6L17 21l-1.8-7.5"/>',
+    '<circle cx="9" cy="8.5" r="3.5"/><path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 5.4a3.5 3.5 0 0 1 0 6.2M17.8 15.3c1.6.7 2.5 2.2 2.8 4.7"/>',
+    '<path d="M4 4v16h16"/><path d="M8.5 16v-5M12.5 16V8M16.5 16v-3"/>',
+    '<rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+    '<path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/>',
+    '<path d="M6 3h12v18l-2-1.4L14 21l-2-1.4L10 21l-2-1.4L6 21z"/><path d="M9 8h6M9 12h6"/>',
+    '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.3A2.6 2.6 0 1 1 12 12.2c-.8.35-1 .9-1 1.8"/><path d="M12 17.2h.01"/>',
+    '<path d="M3.5 21h17"/><rect x="6" y="4" width="12" height="17" rx="1"/><path d="M9.5 8h1.6M13 8h1.6M9.5 12h1.6M13 12h1.6M9.5 16h1.6M13 16h1.6"/>',
+];
+
 $portals = [
     ['icon' => '🧑‍💼', 'role' => 'Admin', 'desc' => 'Students, fees, staff, finance, reports — the full command center of your school.', 'demo' => 'admin'],
     ['icon' => '👩‍🏫', 'role' => 'Teacher', 'desc' => 'Mark attendance, enter marks, build quizzes and view your timetable from your phone.', 'demo' => 'teacher'],
@@ -154,6 +167,34 @@ $faqs = [
 .mini-score span { font-size: 13px; color: var(--muted); font-weight: 500; }
 .mini-bars { margin-top: 16px; display: flex; align-items: flex-end; gap: 8px; height: 74px; background: var(--surface-muted); border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
 .mini-bars i { flex: 1; border-radius: 5px 5px 2px 2px; background: var(--grad); }
+.hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 38px; align-items: center; text-align: left; }
+.hero-copy .hero-cta { justify-content: flex-start; }
+.hero-copy .hero-points { justify-content: flex-start; }
+.hero-copy p.tagline { margin-left: 0; }
+.hero-photo { position: relative; }
+.hero-photo > img { width: 100%; height: auto; display: block; border-radius: 20px; border: 1px solid rgba(255,255,255,.35); box-shadow: 0 34px 70px -22px rgba(2,12,40,.65); }
+.glass-chip { position: absolute; background: rgba(255,255,255,.94); backdrop-filter: blur(6px); color: var(--text); border-radius: 12px; box-shadow: var(--shadow-lg); padding: 9px 13px; font-size: 13px; font-weight: 600; display: flex; gap: 8px; align-items: center; }
+.glass-chip.chip1 { top: 16px; left: -14px; } .glass-chip.chip2 { bottom: 16px; right: -10px; }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; text-align: center; } .hero-copy .hero-cta, .hero-copy .hero-points { justify-content: center; } .glass-chip.chip1 { left: 8px; } .glass-chip.chip2 { right: 8px; } }
+.band { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); margin: 34px 0 4px; }
+.band-photo img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 320px; }
+.band-text { padding: 38px 36px; display: flex; flex-direction: column; justify-content: center; }
+.band-k { color: var(--primary); font-weight: 800; font-size: 12.5px; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 6px; }
+.band-text h2 { margin: 0 0 10px; font-size: clamp(22px, 3vw, 29px); letter-spacing: -.6px; }
+.band-text > p { color: var(--muted); margin: 0 0 14px; font-size: 15px; }
+.ticks { list-style: none; margin: 0 0 20px; padding: 0; }
+.ticks li { padding: 6px 0 6px 26px; position: relative; font-size: 14.5px; font-weight: 500; }
+.ticks li::before { content: "✓"; position: absolute; left: 0; top: 6px; width: 19px; height: 19px; border-radius: 50%; background: var(--grad); color: #fff; font-size: 11.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.band-text .btn { align-self: flex-start; }
+@media (max-width: 900px) { .band { grid-template-columns: 1fr; } .band-photo img { min-height: 220px; max-height: 300px; } }
+.feat-ico svg { display: block; }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 26px; text-align: left; max-width: 1140px; margin: 0 auto; padding: 6px 18px 20px; }
+.foot-grid h4 { margin: 4px 0 12px; font-size: 14px; letter-spacing: .3px; }
+.foot-grid a { display: block; color: var(--muted); font-size: 13.5px; padding: 3.5px 0; }
+.foot-grid a:hover { color: var(--primary); text-decoration: none; }
+.foot-brand p { color: var(--muted); font-size: 13.5px; margin: 12px 0 0; max-width: 320px; }
+.foot-bottom { border-top: 1px solid var(--border); padding-top: 16px; }
+@media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
 footer.site { text-align: center; color: var(--muted); font-size: 13px; padding: 28px 0 22px; }
 </style>
 </head>
@@ -177,33 +218,26 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
 
 <div class="wrap">
   <div class="hero">
-    <div class="float-chip chip-a">🚪 Gate Entry <span class="badge green">Parent Alert Sent</span></div>
-    <div class="float-chip chip-b">🧾 Fee Challan <span class="badge blue">PDF Ready</span></div>
-    <span class="kicker">🎓 Complete School Management System</span>
-    <h1>Run your whole school<br>from <span class="hl">one smart system</span></h1>
-    <p class="tagline"><?= e(APP_TAGLINE) ?> — admissions, attendance, fees, results, staff payroll and parents, all in one place. Built for schools in Pakistan.</p>
-    <div class="hero-cta">
-      <a class="btn white" href="<?= e(app_url('signup.php')) ?>">🏫 Register Your School — Free</a>
-      <a class="btn ghost" href="#demo">▶ Try the Live Demo</a>
-    </div>
-    <div class="hero-points">
-      <span>Free plan up to 50 students</span>
-      <span>Works on any phone</span>
-      <span>Multi-campus ready</span>
-      <span>No installation needed</span>
-    </div>
-    <div class="mock" aria-hidden="true">
-      <div class="mock-bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i><span class="addr">schoolmarkaz — Admin Dashboard</span></div>
-      <div class="mock-body">
-        <div class="mock-side"><b class="on"></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
-        <div class="mock-main">
-          <div class="mock-stats">
-            <div class="mock-stat"><strong>1,248</strong><span>Total Students</span></div>
-            <div class="mock-stat"><strong>96.4%</strong><span>Attendance Today</span></div>
-            <div class="mock-stat"><strong>Rs 8.6L</strong><span>Fees This Month</span></div>
-          </div>
-          <div class="mock-chart"><i style="height:38%"></i><i style="height:55%"></i><i style="height:44%"></i><i style="height:70%"></i><i style="height:62%"></i><i style="height:84%"></i><i style="height:96%"></i></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="kicker">🎓 Complete School Management System</span>
+        <h1>Run your whole school<br>from <span class="hl">one smart system</span></h1>
+        <p class="tagline"><?= e(APP_TAGLINE) ?> — admissions, attendance, fees, results, staff payroll and parents, all in one place. Built for schools in Pakistan.</p>
+        <div class="hero-cta">
+          <a class="btn white" href="<?= e(app_url('signup.php')) ?>">🏫 Register Your School — Free</a>
+          <a class="btn ghost" href="#demo">▶ Try the Live Demo</a>
         </div>
+        <div class="hero-points">
+          <span>Free plan up to 50 students</span>
+          <span>Works on any phone</span>
+          <span>Multi-campus ready</span>
+          <span>No installation needed</span>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="<?= e(app_url('assets/img/principal.jpg')) ?>" alt="A principal running his school with School Markaz">
+        <div class="glass-chip chip1">🚪 Gate Entry <span class="badge green">Parent Alert Sent</span></div>
+        <div class="glass-chip chip2">🧾 Fee Challan <span class="badge blue">PDF Ready</span></div>
       </div>
     </div>
   </div>
@@ -215,6 +249,22 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
     <div class="cell"><strong>🇵🇰 Made for Pakistan</strong><span>Bank challans, PKR billing, local support</span></div>
   </div>
 
+  <div class="band">
+    <div class="band-photo"><img src="<?= e(app_url('assets/img/classroom.jpg')) ?>" alt="A teacher using digital tools in a classroom"></div>
+    <div class="band-text">
+      <p class="band-k">Built For Real Schools</p>
+      <h2>Less register work. More teaching.</h2>
+      <p>School Markaz was designed with Pakistani schools in mind — simple screens your staff already understands, and everything reachable from the phone in your pocket.</p>
+      <ul class="ticks">
+        <li>Works on any phone or computer — nothing to install for staff</li>
+        <li>Parents stay informed with gate alerts, results and fee receipts</li>
+        <li>Your data stays yours — reports and records export anytime</li>
+        <li>Local support from the Weblitex team, in your language</li>
+      </ul>
+      <a class="btn" href="<?= e(app_url('auth/login.php?demo=teacher')) ?>">See the Teacher Portal →</a>
+    </div>
+  </div>
+
   <p class="section-k" id="features">Everything You Need</p>
   <h2 class="section-title">One system for the whole school day</h2>
   <p class="section-sub">From the morning gate scan to the monthly fee report — every module works together, so nothing is typed twice.</p>
@@ -222,7 +272,7 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
     <?php $gi = 0; foreach ($features as $f): $gi++; ?>
     <div class="card" style="margin-bottom:0">
       <div class="card-body feat">
-        <div class="feat-ico g<?= (($gi - 1) % 6) + 1 ?>"><?= e($f['icon']) ?></div>
+        <div class="feat-ico g<?= (($gi - 1) % 6) + 1 ?>"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><?= $svgs[$gi - 1] ?? '' ?></svg></div>
         <div>
           <h3><?= e($f['title']) ?></h3>
           <p><?= e($f['desc']) ?></p>
@@ -344,7 +394,7 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
     <?php endforeach; ?>
   </div>
 
-  <div class="cta-band">
+  <div class="cta-band" style="background:linear-gradient(rgba(6,20,50,.84),rgba(5,32,38,.86)),url('<?= e(app_url('assets/img/students.jpg')) ?>') center/cover">
     <h2>Ready to modernize your school?</h2>
     <p>Create your school account in minutes — the Free plan needs no card and no installation.</p>
     <a class="btn white" href="<?= e(app_url('signup.php')) ?>">🏫 Register Your School</a>
@@ -352,8 +402,33 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
   </div>
 
   <footer class="site">
-    &copy; <?= date('Y') ?> <?= e($schoolName) ?> — <?= e(APP_TAGLINE) ?><br>
-    <span style="font-size:12px">Powered by Weblitex</span>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brandline"><img src="<?= e(app_url('assets/icons/logo.png')) ?>" alt="School Markaz logo"> <?= e($schoolName) ?></div>
+        <p><?= e(APP_TAGLINE) ?> — admissions, attendance, fees, results and parents in one simple system, built for schools in Pakistan.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#demo">Live Demo</a>
+        <a href="<?= e(app_url('signup.php')) ?>">Register a School</a>
+      </div>
+      <div>
+        <h4>Portals</h4>
+        <a href="<?= e(app_url('auth/login.php?demo=admin')) ?>">Admin</a>
+        <a href="<?= e(app_url('auth/login.php?demo=teacher')) ?>">Teacher</a>
+        <a href="<?= e(app_url('auth/login.php?demo=student')) ?>">Student</a>
+        <a href="<?= e(app_url('auth/login.php?demo=parent')) ?>">Parent</a>
+      </div>
+      <div>
+        <h4>Get Started</h4>
+        <a href="<?= e(app_url('admission-form.php')) ?>">Online Admission</a>
+        <a href="<?= e(app_url('auth/login.php')) ?>">Login</a>
+        <a href="#demo">Try the Demo</a>
+      </div>
+    </div>
+    <div class="foot-bottom">&copy; <?= date('Y') ?> <?= e($schoolName) ?> — <?= e(APP_TAGLINE) ?> · Powered by Weblitex</div>
   </footer>
 </div>
 <script src="<?= e(app_url('assets/js/app.js')) ?>"></script>
