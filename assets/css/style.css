@@ -303,3 +303,45 @@ table.table tr:hover td { background: #f2f7ff; }
   .chart-box { height: 240px; }
   input, select, textarea { font-size: 16px; } /* prevent iOS zoom */
 }
+
+/* ================= v4 professional polish ================= */
+body { font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif; }
+h1, h2, h3, .page-title, .brand-text strong, .stat .stat-num, .section-title, .price .pamount, .login-card h1 {
+  font-family: "Plus Jakarta Sans", "Inter", "Segoe UI", sans-serif;
+}
+.nav::-webkit-scrollbar { width: 6px; }
+.nav::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .18); border-radius: 3px; }
+.nav-group {
+  margin: 14px 10px 5px; font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px;
+  text-transform: uppercase; color: #7d94b8;
+}
+.nav-group:first-child { margin-top: 0; }
+.avatar {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: var(--grad); color: #fff; font-weight: 700; font-size: 15px;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 10px -3px rgba(37, 99, 235, .6);
+}
+.stat::after {
+  position: absolute; top: 12px; right: 14px; font-size: 25px; opacity: .16; line-height: 1;
+}
+.stat::after { content: "📊"; }
+.stat.primary::after { content: "🎓"; }
+.stat.green::after { content: "👩‍🏫"; }
+.stat.amber::after { content: "💰"; }
+.stat.red::after { content: "⚠️"; }
+.welcome {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  background: var(--grad-hero); color: #fff; border-radius: var(--radius);
+  padding: 22px 24px; margin-bottom: 20px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+}
+.welcome::after { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(245, 179, 1, .25); filter: blur(50px); top: -120px; right: 60px; }
+.welcome-text h2 { margin: 0 0 4px; font-size: 22px; letter-spacing: -.4px; }
+.welcome-text p { margin: 0; opacity: .88; font-size: 14px; }
+.welcome-actions { display: flex; gap: 9px; flex-wrap: wrap; position: relative; z-index: 1; }
+.welcome .btn.white { background: #fff; color: #1d4ed8; box-shadow: 0 10px 22px -10px rgba(0, 0, 0, .5); }
+.welcome .btn.white:hover { color: #1d4ed8; }
+.welcome .btn.ghost { background: rgba(255, 255, 255, .13); color: #fff; border: 1px solid rgba(255, 255, 255, .4); box-shadow: none; }
+.welcome .btn.ghost:hover { background: rgba(255, 255, 255, .22); color: #fff; }
+.card { transition: box-shadow .2s ease, transform .2s ease; }
+.lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }

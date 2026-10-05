@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Online Admission — <?= e(APP_NAME) ?></title>
 <link rel="icon" type="image/png" href="<?= e(app_url('assets/icons/logo.png')) ?>">
-<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=3">
+<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=4">
 <script>try{if(localStorage.getItem('sm-theme')==='dark'){document.documentElement.dataset.theme='dark';}}catch(e){}</script>
 <style>
 .wrap { max-width: 640px; margin: 0 auto; padding: 24px 18px 40px; }

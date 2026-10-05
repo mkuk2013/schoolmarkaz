@@ -50,7 +50,10 @@ $faqs = [
 <link rel="icon" type="image/png" href="<?= e(app_url('assets/icons/logo.png')) ?>">
 <link rel="manifest" href="<?= e(app_url('manifest.webmanifest')) ?>">
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('<?= e(app_url('sw.js')) ?>').catch(function(){});}</script>
-<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=3">
+<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <script>try{if(localStorage.getItem('sm-theme')==='dark'){document.documentElement.dataset.theme='dark';}}catch(e){}</script>
 <style>
 .wrap { max-width: 1140px; margin: 0 auto; padding: 0 18px; }
@@ -131,6 +134,26 @@ $faqs = [
 .cta-band { border-radius: 24px; background: var(--grad-hero); color: #fff; text-align: center; padding: 46px 26px; margin: 54px 0 8px; box-shadow: var(--shadow-lg); }
 .cta-band h2 { margin: 0 0 8px; font-size: clamp(23px, 3.4vw, 30px); letter-spacing: -.5px; }
 .cta-band p { margin: 0 0 22px; opacity: .92; }
+.bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.bcard { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); padding: 24px; transition: transform .2s ease, box-shadow .2s ease; }
+.bcard:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.bcard h3 { margin: 12px 0 6px; font-size: 17px; letter-spacing: -.3px; }
+.bcard p { margin: 0; color: var(--muted); font-size: 14px; }
+.b-wide { grid-column: span 2; } .b-wide2 { grid-column: span 2; }
+@media (max-width: 900px) { .bento { grid-template-columns: 1fr; } .b-wide, .b-wide2 { grid-column: span 1; } }
+.b-ico { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff; box-shadow: 0 10px 20px -8px rgba(11,21,38,.4); }
+.mini-log { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.mini-log div { display: flex; align-items: center; gap: 9px; background: var(--surface-muted); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; font-size: 13px; font-weight: 500; }
+.mini-log time { margin-left: auto; color: var(--muted); font-size: 12px; }
+.mini-challan { margin-top: 16px; background: var(--surface-muted); border: 1.5px dashed #b6c2d4; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 5px; }
+.mini-challan i { height: 8px; border-radius: 4px; background: #d4dde9; }
+.mini-challan i:nth-child(2) { width: 72%; } .mini-challan i:nth-child(3) { width: 54%; }
+.mini-challan b { margin-top: 6px; font-size: 14px; } .mini-challan span { font-size: 12.5px; color: var(--muted); }
+.mini-score { margin-top: 16px; display: flex; align-items: center; gap: 14px; background: var(--surface-muted); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+.mini-score strong { font-size: 30px; letter-spacing: -1px; color: var(--success); }
+.mini-score span { font-size: 13px; color: var(--muted); font-weight: 500; }
+.mini-bars { margin-top: 16px; display: flex; align-items: flex-end; gap: 8px; height: 74px; background: var(--surface-muted); border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+.mini-bars i { flex: 1; border-radius: 5px 5px 2px 2px; background: var(--grad); }
 footer.site { text-align: center; color: var(--muted); font-size: 13px; padding: 28px 0 22px; }
 </style>
 </head>
@@ -207,6 +230,40 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
       </div>
     </div>
     <?php endforeach; ?>
+  </div>
+
+  <p class="section-k">Inside The App</p>
+  <h2 class="section-title">Made to feel effortless, every day</h2>
+  <p class="section-sub">Real workflows, designed for busy school offices — here is a peek at what your team will use daily.</p>
+  <div class="bento">
+    <div class="bcard b-wide">
+      <div class="b-ico g1">🚪</div>
+      <h3>Gate Attendance in seconds</h3>
+      <p>Scan the student's ID card at the gate. Entry is logged, attendance is marked, and parents can see the alert in their portal — no registers, no phone calls.</p>
+      <div class="mini-log">
+        <div><span class="badge green">IN</span> Ahmed Raza — Class 6-A <time>07:42 AM</time></div>
+        <div><span class="badge green">IN</span> Fatima Noor — Class 4-B <time>07:43 AM</time></div>
+        <div><span class="badge amber">OUT</span> Bilal Ahmed — Class 8-C <time>01:15 PM</time></div>
+      </div>
+    </div>
+    <div class="bcard">
+      <div class="b-ico g4">🧾</div>
+      <h3>3-copy bank challans</h3>
+      <p>Print professional fee challans — Bank, School and Student copies on a single page, straight from the invoice.</p>
+      <div class="mini-challan"><i></i><i></i><i></i><b>CH-2026-00124</b><span>Rs 4,500 — Meezan Bank</span></div>
+    </div>
+    <div class="bcard">
+      <div class="b-ico g2">❓</div>
+      <h3>Quizzes that mark themselves</h3>
+      <p>Teachers create MCQs once — students attempt online and results are calculated instantly, with class-wise analysis.</p>
+      <div class="mini-score"><strong>92%</strong><span>Class average — Science Quiz 4</span></div>
+    </div>
+    <div class="bcard b-wide2">
+      <div class="b-ico g3">📊</div>
+      <h3>Reports without the month-end panic</h3>
+      <p>Fee collection, defaulters, attendance trends and payroll summaries are always one click away — computed live from your data, ready to print or share.</p>
+      <div class="mini-bars"><i style="height:34%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:66%"></i><i style="height:58%"></i><i style="height:78%"></i><i style="height:92%"></i><i style="height:70%"></i></div>
+    </div>
   </div>
 
   <p class="section-k" id="portals">Four Portals</p>

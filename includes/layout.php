@@ -11,27 +11,27 @@ function nav_items(): array
     $role = user_role();
     if ($role === 'admin') {
         return [
-            ['key' => 'dashboard', 'label' => 'Dashboard', 'url' => 'admin/index.php', 'icon' => '▦'],
-            ['key' => 'students', 'label' => 'Students', 'url' => 'admin/students.php', 'icon' => '🎒'],
-            ['key' => 'teachers', 'label' => 'Teachers', 'url' => 'admin/teachers.php', 'icon' => '👩‍🏫'],
-            ['key' => 'parents', 'label' => 'Parents', 'url' => 'admin/parents.php', 'icon' => '👪'],
-            ['key' => 'classes', 'label' => 'Classes', 'url' => 'admin/classes.php', 'icon' => '🏫'],
-            ['key' => 'campuses', 'label' => 'Campuses', 'url' => 'admin/campuses.php', 'icon' => '🏢'],
-            ['key' => 'attendance', 'label' => 'Attendance', 'url' => 'admin/attendance.php', 'icon' => '✓'],
-            ['key' => 'gate', 'label' => 'Gate Attendance', 'url' => 'admin/gate.php', 'icon' => '🚪'],
-            ['key' => 'fees', 'label' => 'Fees', 'url' => 'admin/fees.php', 'icon' => '💰'],
-            ['key' => 'challans', 'label' => 'Bank Challans', 'url' => 'admin/challans.php', 'icon' => '🧾'],
-            ['key' => 'exams', 'label' => 'Exams & Marks', 'url' => 'admin/exams.php', 'icon' => '📝'],
-            ['key' => 'quizzes', 'label' => 'Quizzes', 'url' => 'admin/quizzes.php', 'icon' => '❓'],
-            ['key' => 'idcards', 'label' => 'ID Cards', 'url' => 'admin/idcards.php', 'icon' => '🪪'],
-            ['key' => 'certificates', 'label' => 'Certificates', 'url' => 'admin/certificates.php', 'icon' => '📜'],
-            ['key' => 'timetable', 'label' => 'Timetable', 'url' => 'admin/timetable.php', 'icon' => '🗓'],
-            ['key' => 'finance', 'label' => 'Finance', 'url' => 'admin/finance.php', 'icon' => '📊'],
-            ['key' => 'announcements', 'label' => 'Notices', 'url' => 'admin/announcements.php', 'icon' => '📢'],
-            ['key' => 'inquiries', 'label' => 'Admissions', 'url' => 'admin/inquiries.php', 'icon' => '✉'],
-            ['key' => 'subscriptions', 'label' => 'Subscriptions', 'url' => 'admin/subscriptions.php', 'icon' => '💳'],
-            ['key' => 'reports', 'label' => 'Reports', 'url' => 'admin/reports.php', 'icon' => '📈'],
-            ['key' => 'settings', 'label' => 'Settings', 'url' => 'admin/settings.php', 'icon' => '⚙'],
+            ['key' => 'dashboard', 'label' => 'Dashboard', 'url' => 'admin/index.php', 'icon' => '▦', 'group' => 'Overview'],
+            ['key' => 'students', 'label' => 'Students', 'url' => 'admin/students.php', 'icon' => '🎒', 'group' => 'People'],
+            ['key' => 'teachers', 'label' => 'Teachers', 'url' => 'admin/teachers.php', 'icon' => '👩‍🏫', 'group' => 'People'],
+            ['key' => 'parents', 'label' => 'Parents', 'url' => 'admin/parents.php', 'icon' => '👪', 'group' => 'People'],
+            ['key' => 'classes', 'label' => 'Classes', 'url' => 'admin/classes.php', 'icon' => '🏫', 'group' => 'Academics'],
+            ['key' => 'attendance', 'label' => 'Attendance', 'url' => 'admin/attendance.php', 'icon' => '✓', 'group' => 'Academics'],
+            ['key' => 'gate', 'label' => 'Gate Attendance', 'url' => 'admin/gate.php', 'icon' => '🚪', 'group' => 'Academics'],
+            ['key' => 'exams', 'label' => 'Exams & Marks', 'url' => 'admin/exams.php', 'icon' => '📝', 'group' => 'Academics'],
+            ['key' => 'quizzes', 'label' => 'Quizzes', 'url' => 'admin/quizzes.php', 'icon' => '❓', 'group' => 'Academics'],
+            ['key' => 'timetable', 'label' => 'Timetable', 'url' => 'admin/timetable.php', 'icon' => '🗓', 'group' => 'Academics'],
+            ['key' => 'fees', 'label' => 'Fees', 'url' => 'admin/fees.php', 'icon' => '💰', 'group' => 'Finance'],
+            ['key' => 'challans', 'label' => 'Bank Challans', 'url' => 'admin/challans.php', 'icon' => '🧾', 'group' => 'Finance'],
+            ['key' => 'finance', 'label' => 'Finance', 'url' => 'admin/finance.php', 'icon' => '📊', 'group' => 'Finance'],
+            ['key' => 'reports', 'label' => 'Reports', 'url' => 'admin/reports.php', 'icon' => '📈', 'group' => 'Finance'],
+            ['key' => 'idcards', 'label' => 'ID Cards', 'url' => 'admin/idcards.php', 'icon' => '🪪', 'group' => 'Documents'],
+            ['key' => 'certificates', 'label' => 'Certificates', 'url' => 'admin/certificates.php', 'icon' => '📜', 'group' => 'Documents'],
+            ['key' => 'campuses', 'label' => 'Campuses', 'url' => 'admin/campuses.php', 'icon' => '🏢', 'group' => 'School'],
+            ['key' => 'announcements', 'label' => 'Notices', 'url' => 'admin/announcements.php', 'icon' => '📢', 'group' => 'School'],
+            ['key' => 'inquiries', 'label' => 'Admissions', 'url' => 'admin/inquiries.php', 'icon' => '✉', 'group' => 'School'],
+            ['key' => 'subscriptions', 'label' => 'Subscriptions', 'url' => 'admin/subscriptions.php', 'icon' => '💳', 'group' => 'School'],
+            ['key' => 'settings', 'label' => 'Settings', 'url' => 'admin/settings.php', 'icon' => '⚙', 'group' => 'School'],
         ];
     }
     if ($role === 'teacher') {
@@ -112,7 +112,10 @@ function layout_top(string $title, string $active = ''): void
 <link rel="icon" href="<?= e($base) ?>/assets/icons/logo.png" type="image/png">
 <link rel="manifest" href="<?= e($base) ?>/manifest.webmanifest">
 <link rel="apple-touch-icon" href="<?= e($base) ?>/assets/icons/icon-192.png">
-<link rel="stylesheet" href="<?= e($base) ?>/assets/css/style.css?v=3">
+<link rel="stylesheet" href="<?= e($base) ?>/assets/css/style.css?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <script>try{if(localStorage.getItem('sm-theme')==='dark'){document.documentElement.dataset.theme='dark';}}catch(e){}</script>
 </head>
 <body>
@@ -126,7 +129,10 @@ function layout_top(string $title, string $active = ''): void
       </div>
     </div>
     <nav class="nav">
-      <?php foreach ($items as $it): ?>
+      <?php $lastGroup = null; foreach ($items as $it): ?>
+        <?php if (!empty($it['group']) && $it['group'] !== $lastGroup): $lastGroup = $it['group']; ?>
+        <div class="nav-group"><?= e($it['group']) ?></div>
+        <?php endif; ?>
         <a href="<?= e($base . '/' . $it['url']) ?>"
            class="nav-link<?= $active === $it['key'] ? ' active' : '' ?>">
           <span class="nav-icon"><?= $it['icon'] ?></span><?= e($it['label']) ?>
@@ -149,6 +155,7 @@ function layout_top(string $title, string $active = ''): void
         <?php if ($user): ?>
         <a class="icon-btn" href="<?= e($base . '/' . $user['role'] . '/announcements.php') ?>" aria-label="Notices" title="Notices">🔔<?php if ($noticeCount > 0): ?><span class="notif-badge"><?= $noticeCount ?></span><?php endif; ?></a>
         <div class="user-chip">
+          <span class="avatar"><?= e(strtoupper(substr((string) ($user['username'] ?? 'U'), 0, 1))) ?></span>
           <span class="user-name"><?= e($user['username'] ?? '') ?></span>
           <span class="badge"><?= e($roleLabel) ?></span>
         </div>

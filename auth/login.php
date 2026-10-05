@@ -57,7 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login — <?= e(APP_NAME) ?></title>
 <link rel="icon" type="image/png" href="<?= e(app_url('assets/icons/logo.png')) ?>">
-<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=3">
+<link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <script>try{if(localStorage.getItem('sm-theme')==='dark'){document.documentElement.dataset.theme='dark';}}catch(e){}</script>
 <style>
 .wrap { max-width: 440px; margin: 0 auto; padding: 48px 18px 40px; }

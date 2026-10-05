@@ -1,6 +1,6 @@
 // School Markaz service worker — offline-friendly shell for static assets.
 // Pages are network-first (live data), static files cache-first.
-const CACHE = 'schoolmarkaz-v3';
+const CACHE = 'schoolmarkaz-v4';
 const CORE = ['./', 'assets/css/style.css', 'assets/js/app.js', 'assets/icons/icon-192.png', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {
