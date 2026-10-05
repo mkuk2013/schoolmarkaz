@@ -97,7 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 .lg-demos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .lg-demo { display: flex; align-items: center; gap: 11px; padding: 12px 13px; border: 1.5px solid var(--border); border-radius: 14px; background: var(--surface); transition: transform .15s, border-color .15s, box-shadow .15s; }
 .lg-demo:hover { transform: translateY(-2px); border-color: var(--primary); box-shadow: var(--shadow); text-decoration: none; }
-.lg-demo .lg-ico { width: 38px; height: 38px; flex: none; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; }
+.lg-demo .lg-ico { width: 38px; height: 38px; flex: none; border-radius: 11px; display: flex; align-items: center; justify-content: center; color: #fff; }
+.lg-ico svg { display: block; }
+.lg-chips svg { vertical-align: -2px; margin-right: 2px; }
 .lg-demo b { display: block; font-size: 14px; color: var(--text); line-height: 1.25; }
 .lg-demo small { color: var(--muted); font-size: 12px; }
 .g-a { background: linear-gradient(135deg, #2563eb, #1d4ed8); } .g-t { background: linear-gradient(135deg, #059669, #047857); }
@@ -125,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <li>Fee challans &amp; receipts in one click</li>
         <li>Separate portals for admin, teachers, students &amp; parents</li>
       </ul>
-      <div class="lg-chips"><span>🎓 4 Portals</span><span>🏫 Multi-Campus</span><span>📱 Works on any phone</span></div>
+      <div class="lg-chips"><span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5 12 5l9.5 4.5L12 14z"/><path d="M6.5 11.5V16c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3v-4.5"/><path d="M21.5 9.5V15"/></svg> 4 Portals</span><span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 21h17"/><rect x="6" y="4" width="12" height="17" rx="1"/><path d="M9.5 8h1.6M13 8h1.6M9.5 12h1.6M13 12h1.6M9.5 16h1.6M13 16h1.6"/></svg> Multi-Campus</span><span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg> Works on any phone</span></div>
     </div>
     <div class="lg-foot">Powered by Weblitex · Umerkot, Sindh</div>
   </aside>
@@ -135,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a class="lg-mobile-brand" href="<?= e(app_url('index.php')) ?>">
         <img src="<?= e(app_url('assets/icons/logo.png')) ?>" alt="School Markaz logo"> <?= e(APP_NAME) ?>
       </a>
-      <h2>Welcome back 👋</h2>
+      <h2>Welcome back</h2>
       <p class="lg-sub">Sign in to your portal to continue.</p>
 
       <?php foreach (get_flashes() as $f): ?>
@@ -169,10 +171,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <div class="lg-divider">Or explore the demo</div>
       <div class="lg-demos">
-        <a class="lg-demo" href="<?= e(app_url('auth/login.php?demo=admin')) ?>"><span class="lg-ico g-a">🧑‍💼</span><span><b>Admin</b><small>Full school control</small></span></a>
-        <a class="lg-demo" href="<?= e(app_url('auth/login.php?demo=teacher')) ?>"><span class="lg-ico g-t">👩‍🏫</span><span><b>Teacher</b><small>Classes &amp; results</small></span></a>
-        <a class="lg-demo" href="<?= e(app_url('auth/login.php?demo=student')) ?>"><span class="lg-ico g-s">🎒</span><span><b>Student</b><small>Results &amp; fees</small></span></a>
-        <a class="lg-demo" href="<?= e(app_url('auth/login.php?demo=parent')) ?>"><span class="lg-ico g-p">👪</span><span><b>Parent</b><small>Child's progress</small></span></a>
+        <a class="lg-demo" href="<?= e(app_url('auth/login.php?demo=admin')) ?>"><span class="lg-ico g-a"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.5v5.5c0 4.5-3 7.8-7 9.5C8 18.8 5 15.5 5 11V5.5z"/><path d="m9 11.5 2.2 2.2 4.3-4.2"/></svg></span><span><b>Admin</b><small>Full school control</small></span></a>
+        <a class="lg-demo" href="<?= e(app_url('auth/login.php?demo=teacher')) ?>"><span class="lg-ico g-t"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-1.8-1.5-4-2-8-2v14c4 0 6.2.5 8 2 1.8-1.5 4-2 8-2V4c-4 0-6.2.5-8 2Z"/><path d="M12 6v14"/></svg></span><span><b>Teacher</b><small>Classes &amp; results</small></span></a>
+        <a class="lg-demo" href="<?= e(app_url('auth/login.php?demo=student')) ?>"><span class="lg-ico g-s"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5 12 5l9.5 4.5L12 14z"/><path d="M6.5 11.5V16c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3v-4.5"/><path d="M21.5 9.5V15"/></svg></span><span><b>Student</b><small>Results &amp; fees</small></span></a>
+        <a class="lg-demo" href="<?= e(app_url('auth/login.php?demo=parent')) ?>"><span class="lg-ico g-p"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.5"/><path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 5.4a3.5 3.5 0 0 1 0 6.2M17.8 15.3c1.6.7 2.5 2.2 2.8 4.7"/></svg></span><span><b>Parent</b><small>Child's progress</small></span></a>
       </div>
       <p class="lg-back"><a href="<?= e(app_url('index.php')) ?>">← Back to home</a></p>
     </div>

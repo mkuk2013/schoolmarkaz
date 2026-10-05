@@ -57,13 +57,13 @@ layout_top('Dashboard', 'dashboard');
 ?>
 <div class="welcome">
   <div class="welcome-text">
-    <h2>👋 Welcome back, <?= e(current_user()['username'] ?? 'Admin') ?></h2>
+    <h2>Welcome back, <?= e(current_user()['username'] ?? 'Admin') ?></h2>
     <p><?= e(date('l, d F Y')) ?> — here is what is happening at your school today.</p>
   </div>
   <div class="welcome-actions">
     <a class="btn white small" href="<?= e(app_url('admin/students.php')) ?>">＋ Add Student</a>
-    <a class="btn ghost small" href="<?= e(app_url('admin/fees.php')) ?>">💰 Collect Fee</a>
-    <a class="btn ghost small" href="<?= e(app_url('admin/gate.php')) ?>">🚪 Gate Scan</a>
+    <a class="btn ghost small" href="<?= e(app_url('admin/fees.php')) ?>"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5h.01M17.5 14.5h.01"/></svg> Collect Fee</a>
+    <a class="btn ghost small" href="<?= e(app_url('admin/gate.php')) ?>"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg> Gate Scan</a>
   </div>
 </div>
 <?php if ($pendingSubs > 0): ?>

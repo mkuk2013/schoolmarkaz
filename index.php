@@ -209,7 +209,7 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
       <a class="plain" href="#features">Features</a>
       <a class="plain" href="#portals">Portals</a>
       <a class="plain" href="#pricing">Pricing</a>
-      <button class="btn secondary small" onclick="smToggleTheme()" type="button" title="Dark mode">🌙</button>
+      <button class="btn secondary small" onclick="smToggleTheme()" type="button" title="Dark mode"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg></button>
       <a class="btn secondary small" href="<?= e(app_url('admission-form.php')) ?>">Online Admission</a>
       <a class="btn small" href="<?= e(app_url('auth/login.php')) ?>">Login</a>
     </div>
@@ -220,12 +220,12 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
   <div class="hero">
     <div class="hero-grid">
       <div class="hero-copy">
-        <span class="kicker">🎓 Complete School Management System</span>
+        <span class="kicker"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M2.5 9.5 12 5l9.5 4.5L12 14z"/><path d="M6.5 11.5V16c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3v-4.5"/><path d="M21.5 9.5V15"/></svg> Complete School Management System</span>
         <h1>Run your whole school<br>from <span class="hl">one smart system</span></h1>
         <p class="tagline"><?= e(APP_TAGLINE) ?> — admissions, attendance, fees, results, staff payroll and parents, all in one place. Built for schools in Pakistan.</p>
         <div class="hero-cta">
-          <a class="btn white" href="<?= e(app_url('signup.php')) ?>">🏫 Register Your School — Free</a>
-          <a class="btn ghost" href="#demo">▶ Try the Live Demo</a>
+          <a class="btn white" href="<?= e(app_url('signup.php')) ?>">Register Your School — Free</a>
+          <a class="btn ghost" href="#demo"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" style="vertical-align:-2px"><path d="M8 5.5v13l11-6.5z"/></svg> Try the Live Demo</a>
         </div>
         <div class="hero-points">
           <span>Free plan up to 50 students</span>
@@ -236,15 +236,15 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
       </div>
       <div class="hero-photo">
         <img src="<?= e(app_url('assets/img/principal.jpg')) ?>" alt="A principal running his school with School Markaz">
-        <div class="glass-chip chip1">🚪 Gate Entry <span class="badge green">Parent Alert Sent</span></div>
-        <div class="glass-chip chip2">🧾 Fee Challan <span class="badge blue">PDF Ready</span></div>
+        <div class="glass-chip chip1"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg> Gate Entry <span class="badge green">Parent Alert Sent</span></div>
+        <div class="glass-chip chip2"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2-1.4L14 21l-2-1.4L10 21l-2-1.4L6 21z"/><path d="M9 8h6M9 12h6"/></svg> Fee Challan <span class="badge blue">PDF Ready</span></div>
       </div>
     </div>
   </div>
 
   <div class="strip">
     <div class="cell"><strong>🎁 Free Forever Plan</strong><span>Up to 50 students, core modules included</span></div>
-    <div class="cell"><strong>📱 Mobile App (PWA)</strong><span>Installs on any phone — no Play Store needed</span></div>
+    <div class="cell"><strong><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-3px"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg> Mobile App (PWA)</strong><span>Installs on any phone — no Play Store needed</span></div>
     <div class="cell"><strong>🏢 Multi-Campus</strong><span>All branches in one account, easy transfers</span></div>
     <div class="cell"><strong>🇵🇰 Made for Pakistan</strong><span>Bank challans, PKR billing, local support</span></div>
   </div>
@@ -287,7 +287,7 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
   <p class="section-sub">Real workflows, designed for busy school offices — here is a peek at what your team will use daily.</p>
   <div class="bento">
     <div class="bcard b-wide">
-      <div class="b-ico g1">🚪</div>
+      <div class="b-ico g1"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg></div>
       <h3>Gate Attendance in seconds</h3>
       <p>Scan the student's ID card at the gate. Entry is logged, attendance is marked, and parents can see the alert in their portal — no registers, no phone calls.</p>
       <div class="mini-log">
@@ -297,19 +297,19 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
       </div>
     </div>
     <div class="bcard">
-      <div class="b-ico g4">🧾</div>
+      <div class="b-ico g4"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2-1.4L14 21l-2-1.4L10 21l-2-1.4L6 21z"/><path d="M9 8h6M9 12h6"/></svg></div>
       <h3>3-copy bank challans</h3>
       <p>Print professional fee challans — Bank, School and Student copies on a single page, straight from the invoice.</p>
       <div class="mini-challan"><i></i><i></i><i></i><b>CH-2026-00124</b><span>Rs 4,500 — Meezan Bank</span></div>
     </div>
     <div class="bcard">
-      <div class="b-ico g2">❓</div>
+      <div class="b-ico g2"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3A2.6 2.6 0 1 1 12 12.2c-.8.35-1 .9-1 1.8"/><path d="M12 17.2h.01"/></svg></div>
       <h3>Quizzes that mark themselves</h3>
       <p>Teachers create MCQs once — students attempt online and results are calculated instantly, with class-wise analysis.</p>
       <div class="mini-score"><strong>92%</strong><span>Class average — Science Quiz 4</span></div>
     </div>
     <div class="bcard b-wide2">
-      <div class="b-ico g3">📊</div>
+      <div class="b-ico g3"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M8.5 16v-5M12.5 16V8M16.5 16v-3"/></svg></div>
       <h3>Reports without the month-end panic</h3>
       <p>Fee collection, defaulters, attendance trends and payroll summaries are always one click away — computed live from your data, ready to print or share.</p>
       <div class="mini-bars"><i style="height:34%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:66%"></i><i style="height:58%"></i><i style="height:78%"></i><i style="height:92%"></i><i style="height:70%"></i></div>
@@ -320,10 +320,17 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
   <h2 class="section-title">Everyone gets their own app</h2>
   <p class="section-sub">Admin, teachers, students and parents each sign in to a portal made for them.</p>
   <div class="grid grid-4" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-    <?php foreach ($portals as $pt): ?>
+    <?php
+    $portalSvgs = [
+        'admin' => '<svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.5v5.5c0 4.5-3 7.8-7 9.5C8 18.8 5 15.5 5 11V5.5z"/><path d="m9 11.5 2.2 2.2 4.3-4.2"/></svg>',
+        'teacher' => '<svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-1.8-1.5-4-2-8-2v14c4 0 6.2.5 8 2 1.8-1.5 4-2 8-2V4c-4 0-6.2.5-8 2Z"/><path d="M12 6v14"/></svg>',
+        'student' => '<svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5 12 5l9.5 4.5L12 14z"/><path d="M6.5 11.5V16c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3v-4.5"/><path d="M21.5 9.5V15"/></svg>',
+        'parent' => '<svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.5"/><path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 5.4a3.5 3.5 0 0 1 0 6.2M17.8 15.3c1.6.7 2.5 2.2 2.8 4.7"/></svg>',
+    ];
+    foreach ($portals as $pt): ?>
     <div class="card portal-card" style="margin-bottom:0">
       <div class="card-body">
-        <div class="pico"><?= $pt['icon'] ?></div>
+        <div class="pico" style="color:var(--primary)"><?= $portalSvgs[$pt['demo']] ?? '' ?></div>
         <h3><?= e($pt['role']) ?> Portal</h3>
         <p><?= e($pt['desc']) ?></p>
         <a class="btn secondary small" href="<?= e(app_url('auth/login.php?demo=' . $pt['demo'])) ?>">Open Demo →</a>
@@ -373,10 +380,10 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
   <div class="card">
     <div class="card-body">
       <div class="demo-btns">
-        <a class="btn" href="<?= e(app_url('auth/login.php?demo=admin')) ?>">🧑‍💼 Demo Admin</a>
-        <a class="btn secondary" href="<?= e(app_url('auth/login.php?demo=teacher')) ?>">👩‍🏫 Demo Teacher</a>
-        <a class="btn secondary" href="<?= e(app_url('auth/login.php?demo=student')) ?>">🎒 Demo Student</a>
-        <a class="btn secondary" href="<?= e(app_url('auth/login.php?demo=parent')) ?>">👪 Demo Parent</a>
+        <a class="btn" href="<?= e(app_url('auth/login.php?demo=admin')) ?>">Demo Admin</a>
+        <a class="btn secondary" href="<?= e(app_url('auth/login.php?demo=teacher')) ?>">Demo Teacher</a>
+        <a class="btn secondary" href="<?= e(app_url('auth/login.php?demo=student')) ?>">Demo Student</a>
+        <a class="btn secondary" href="<?= e(app_url('auth/login.php?demo=parent')) ?>">Demo Parent</a>
       </div>
       <p style="text-align:center;color:var(--muted);font-size:13px;margin:6px 0 0">Demo accounts are for evaluation only.</p>
     </div>
@@ -397,8 +404,8 @@ footer.site { text-align: center; color: var(--muted); font-size: 13px; padding:
   <div class="cta-band" style="background:linear-gradient(rgba(6,20,50,.84),rgba(5,32,38,.86)),url('<?= e(app_url('assets/img/students.jpg')) ?>') center/cover">
     <h2>Ready to modernize your school?</h2>
     <p>Create your school account in minutes — the Free plan needs no card and no installation.</p>
-    <a class="btn white" href="<?= e(app_url('signup.php')) ?>">🏫 Register Your School</a>
-    <a class="btn ghost" href="<?= e(app_url('admission-form.php')) ?>">🎓 Online Admission Form</a>
+    <a class="btn white" href="<?= e(app_url('signup.php')) ?>">Register Your School</a>
+    <a class="btn ghost" href="<?= e(app_url('admission-form.php')) ?>">Online Admission Form</a>
   </div>
 
   <footer class="site">
